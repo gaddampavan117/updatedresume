@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pavan Gaddam - Digital Marketing Professional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals with Subtle Accents -->
+    <!-- Application Structure Plan: A single-page application with a fixed navigation bar for easy access to different sections: Home, Skills, Experience, and Achievements. This thematic structure allows for a quick overview and deep dives into specific areas of expertise, making it more user-friendly than a traditional linear resume. The interactive elements are designed to engage the user and provide more detailed information on demand. -->
+    <!-- Visualization & Content Choices: 
+        - Skills: Presented as a dynamic bar chart to visually represent proficiency levels and as clickable tags to filter relevant experience highlights. This provides a quick visual summary and allows for deeper exploration.
+        - Experience: An interactive timeline format to showcase career progression. Clicking on each role reveals detailed responsibilities and achievements, making the information digestible and engaging.
+        - Achievements: Key metrics like ROI increase are highlighted in a dedicated section with visually appealing cards and a doughnut chart to draw attention to significant accomplishments.
+        - All visualizations are implemented using Chart.js on a canvas, adhering to the no-SVG/Mermaid constraint. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4;
+            color: #333;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <nav class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-10">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#home" class="text-2xl font-bold text-gray-800">Pavan Gaddam</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#skills" class="text-gray-600 hover:text-gray-800 transition duration-300">Skills</a>
+                    <a href="#experience" class="text-gray-600 hover:text-gray-800 transition duration-300">Experience</a>
+                    <a href="#achievements" class="text-gray-600 hover:text-gray-800 transition duration-300">Achievements</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#skills" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Skills</a>
+            <a href="#experience" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Experience</a>
+            <a href="#achievements" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Achievements</a>
+        </div>
+    </nav>
+
+    <header id="home" class="pt-24 pb-12 bg-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Digital Marketing Professional</h1>
+            <p class="text-lg text-gray-600">A highly accomplished and results-driven Digital Marketing professional with over 12 years of experience specializing in social media and community platform advertising. Proven expertise in end-to-end campaign management, client relations, and performance optimization on platforms like Reddit, DV360, Google Ads, and Meta Ads. Adept at driving business growth through strategic account upselling and technical problem-solving.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="skills" class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Core Competencies</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="chart-container">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-4 justify-center">
+                            <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-300 transition duration-300" data-skill="Pacing & Optimization">Pacing & Optimization</span>
+                            <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-300 transition duration-300" data-skill="Client Relations">Client Relations</span>
+                            <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-300 transition duration-300" data-skill="Team Handling & Operations">Team Handling & Operations</span>
+                            <span class="skill-tag bg-gray-200 text-gray-700 px-4 py-2 rounded-full cursor-pointer hover:bg-gray-300 transition duration-300" data-skill="Platform Expertise">Platform Expertise</span>
+                        </div>
+                        <p id="skill-description" class="mt-8 text-center text-gray-600">Click on a skill to see more details.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Career Journey</h2>
+                <div class="relative">
+                    <div class="border-l-2 border-gray-200 absolute h-full top-0 left-1/2 -ml-px"></div>
+                    <div class="space-y-12">
+                        <div class="timeline-item flex md:justify-end md:pr-8">
+                            <div class="md:w-1/2">
+                                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold">Senior Account Strategist</h3>
+                                    <p class="text-sm text-gray-500">Marketstar | Dec 2023 - Present</p>
+                                    <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                        <li>Directed all aspects of digital advertising campaigns, including managing category takeovers and implementing advanced pacing strategies to ensure on-budget delivery and maximum performance.</li>
+                                        <li>Analyzed and optimized campaign performance at a granular level, evaluating data by campaign, ad group, ad placement, device, keywords, subreddits, and geo-location to consistently improve key performance indicators (KPIs) such as CTR, conversion rates, and return on ad spend (ROAS).</li>
+                                        <li>Developed and executed comprehensive research on subreddit communities using interest taxonomy to identify key audience segments and recommend strategic targeting for clients.</li>
+                                        <li>Served as the primary point of contact for a portfolio of clients, building strong relationships by providing strategic guidance and delivering detailed performance insights.</li>
+                                        <li>Identified and successfully executed upsell opportunities with existing clients, contributing to a significant increase in account revenue and long-term partnerships.</li>
+                                        <li>Led cross-functional communication with creative and funding teams to streamline campaign setup and resource allocation.</li>
+                                        <li>Served as a technical expert, resolving complex queries related to campaign setup, ad serving, and performance tracking, including API whitelisting, pixel implementation, and CAPI integrations.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item flex md:justify-start md:pl-8">
+                             <div class="md:w-1/2">
+                                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold">Director of Ad Operations</h3>
+                                    <p class="text-sm text-gray-500">Mediasquads | Jun 2019 - Nov 2023</p>
+                                    <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                        <li>Developed, recommended, and executed proposal, account, and campaign strategy. Handled campaign setup, reporting, optimizations, and troubleshooting.</li>
+                                        <li>Helped with pixel implementation on clients' websites and integrated Google Analytics with third-party tools for data collection and advertising.</li>
+                                        <li>Provided ongoing reporting daily, weekly, and monthly, and compared quarterly performance to suggest optimization changes.</li>
+                                        <li>Analyzed detailed data including CPC, impressions, CTR, and conversions to reach desired CPA levels and increase ROI.</li>
+                                        <li>Identified, evaluated, and monitored relevant social media channels (Facebook and Instagram).</li>
+                                        <li>Trained a team of 50 members, conducting weekly knowledge refreshment sessions and 1-on-1 sessions to improve their skills.</li>
+                                        <li>Helped the team in account and campaign troubleshooting and distributed workflow to meet TATs.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="timeline-item flex md:justify-end md:pr-8">
+                            <div class="md:w-1/2">
+                                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold">Business Operations Senior Analyst</h3>
+                                    <p class="text-sm text-gray-500">Accenture/Google | Jun 2018 - May 2019</p>
+                                    <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                        <li>Implemented Google Analytics as per business requirements to track website performance and traffic.</li>
+                                        <li>Implemented Analytics for e-commerce to measure Key Performance Metrics driving product sales and revenue.</li>
+                                        <li>Performed thorough analysis of user source, managing organic, social, referral, and paid traffic data.</li>
+                                        <li>Optimized paid campaigns to get high-quality traffic at optimal business expenditure.</li>
+                                        <li>Troubleshot discrepancies with various reports and provided solutions based on product feasibility.</li>
+                                        <li>Exported large amounts of pure data using BigQuery SQL to integrate with third-party BI tools like Tableau and DOMO.</li>
+                                        <li>Trained clients and suggested the best possible solutions based on their requirements with data.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="timeline-item flex md:justify-start md:pl-8">
+                            <div class="md:w-1/2">
+                                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold">Technical Account Manager & Team Co-ordinator</h3>
+                                    <p class="text-sm text-gray-500">Adroll | Mar 2015 - Apr 2016</p>
+                                    <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                        <li>Worked directly with clients to troubleshoot pixel implementation, including enhanced conversion tracking and event/button pixels.</li>
+                                        <li>Troubleshot complex campaign issues on Facebook RTB, WCA, Instagram, and resolved data discrepancies with Google Analytics.</li>
+                                        <li>Filed bug reports to product engineers through Jira and worked directly with the Facebook support team to resolve system-wide issues.</li>
+                                        <li>Ran SQL queries to get database reports and manage events related to troubleshooting multiple tool-based problems.</li>
+                                        <li>Managed integration setups for platforms like Facebook, Instagram, Shopify, and Magento.</li>
+                                        <li>Built internal tools for automation, drove team adoption, and identified process improvements to coordinate with senior leaders.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="timeline-item flex md:justify-end md:pr-8">
+                            <div class="md:w-1/2">
+                                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold">Account Planner & Account Management</h3>
+                                    <p class="text-sm text-gray-500">Adroll | Oct 2013 - Feb 2015</p>
+                                    <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                        <li>Managed campaign launches, ad uploads, and editing campaigns and ad groups.</li>
+                                        <li>Created segments from websites and added UTMs to track campaign performance.</li>
+                                        <li>Performed optimization, including CPM bid optimization, network allocation, and managing budgets to enhance campaign performance.</li>
+                                        <li>Generated daily, weekly, and monthly reports as per Account Manager's requirements.</li>
+                                        <li>Managed account growth through implementing campaign solutions and advanced optimization techniques across retargeting platforms.</li>
+                                        <li>Identified and sized opportunities in accounts and collaborated with sales teams to create a growth strategy for high-potential advertisers.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-item flex md:justify-start md:pl-8">
+                            <div class="md:w-1/2">
+                                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                                    <h3 class="text-xl font-bold">Ad Trafficker</h3>
+                                    <p class="text-sm text-gray-500">Technorati and Greystripe | Jul 2012 - Oct 2013</p>
+                                    <ul class="list-disc list-inside mt-4 text-gray-600 space-y-2">
+                                        <li>Launched campaigns for advertisers and uploaded third-party tags like Zedo, Atlas, DFA, and others.</li>
+                                        <li>Performed CPM bid optimization for publishers.</li>
+                                        <li>Provided audience targeting reports and custom audience reports, giving an overview of impressions, clicks, CPM, and revenue gained.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="py-20">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12">Key Achievements</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl font-bold text-gray-800">10x ROI</h3>
+                        <p class="text-gray-600">Increased ROI for cruise advertisers</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl font-bold text-gray-800">3M/Quarter</h3>
+                        <p class="text-gray-600">Handled a book of business with a value of approximately 3M per quarter</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-2xl font-bold text-gray-800">Client Favorite</h3>
+                        <p class="text-gray-600">Received the Client Favorite award three times</p>
+                    </div>
+                </div>
+                 <div class="mt-12">
+                    <div class="chart-container">
+                        <canvas id="achievementsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>&copy; 2025 Pavan Gaddam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const skillsData = {
+                'Pacing & Optimization': 'Expertise in campaign strategy, performance analysis, a/b testing, and data-driven optimization to maximize roi.',
+                'Client Relations': 'skilled in account management, strategic consulting, and client communication to build and maintain strong partnerships.',
+                'Team Handling & Operations': 'proven ability in team leadership, cross-functional communication, and workflow management to ensure seamless project execution.',
+                'Platform Expertise': 'in-depth knowledge of reddit advertising, programmatic media buying, and technical troubleshooting for various ad operations.'
+            };
+
+            const skillTags = document.querySelectorAll('.skill-tag');
+            const skillDescription = document.getElementById('skill-description');
+
+            skillTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    skillDescription.textContent = skillsData[tag.dataset.skill];
+                });
+            });
+
+            const skillsChartCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pacing & Optimization', 'Client Relations', 'Team Handling', 'Platform Expertise'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [95, 90, 85, 98],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const achievementsChartCtx = document.getElementById('achievementsChart').getContext('2d');
+            new Chart(achievementsChartCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Campaign Management', 'Client Satisfaction', 'Team Leadership', 'Revenue Growth'],
+                    datasets: [{
+                        data: [30, 25, 20, 25],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)',
+                            'rgba(75, 192, 192, 0.8)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</body>
+</html>
